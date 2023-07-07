@@ -13,7 +13,7 @@ services:
     container_name: kittygram_db
     env_file: .env
     volumes:
-      - pg_data_production:/var/lib/postgresql/data
+      - pg_data_kittygram:/var/lib/postgresql/data
   backend:
     image: dmsvalik/kittygram_backend
     env_file: .env
