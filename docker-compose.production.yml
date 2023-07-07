@@ -23,14 +23,14 @@ services:
   frontend:
     image: dmsvalik/kittygram_frontend  # Качаем с Docker Hub
     env_file: .env
-    command: cp -r /app/build/. /staticfiles/
+    command: cp -r /app/build/. /static/
     volumes:
-      - static:/staticfiles
+      - static:/static/
   gateway:
     image: dmsvalik/kittygram_gateway  # Качаем с Docker Hub
     env_file: .env
     ports:
       - 9000:80
     volumes:
-      - static:/staticfiles/
-      - media:/app/media
+      - static:/static/
+      - media:/app/media/
