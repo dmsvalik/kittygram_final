@@ -10,7 +10,7 @@ volumes:
 services:
   db:
     image: postgres:13
-    container_name: kittygram_db
+    # container_name: kittygram_db
     env_file: .env
     volumes:
       - pg_data_kittygram:/var/lib/postgresql/data
@@ -29,8 +29,8 @@ services:
   gateway:
     image: dmsvalik/kittygram_gateway  # Качаем с Docker Hub
     env_file: .env
-    volumes:
-      - static_kittygram:/staticfiles/
-      - media_kittygram:/app/media
     ports:
       - 9000:80
+    volumes:
+      - static_kittygram:/staticfiles/
+      - media_kittygram:/app/static/media
