@@ -20,9 +20,9 @@ services:
   frontend:
     build: ./frontend/
     env_file: .env
-    command: cp -r /app/build/. /static/
+    command: cp -r /app/build/. /staticfiles/
     volumes:
-      - static:/static/
+      - static:/staticfiles/
   gateway:
     build: ./nginx/
     env_file: .env
