@@ -2,9 +2,9 @@
 version: '3'
 
 volumes:
-  pg_data_kittygram:
-  static_kittygram:
-  media_kittygram:
+  pg_data:
+  static:
+  media:
 
 # Всё отличие — заменяем build на image и указываем, какой образ использовать
 services:
@@ -13,24 +13,24 @@ services:
     # container_name: kittygram_db
     env_file: .env
     volumes:
-      - pg_data_kittygram:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
   backend:
     image: dmsvalik/kittygram_backend
     env_file: .env
     volumes:
-      - static_kittygram:/backend_static
-      - media_kittygram:/app/media
+      - static:/backend_static
+      - media:/app/media
   frontend:
     image: dmsvalik/kittygram_frontend  # Качаем с Docker Hub
     env_file: .env
-    command: cp -r /app/build/. /frontend_static/
+    command: cp -r /app/build/. /staticfiles/
     volumes:
-      - static_kittygram:/frontend_static
+      - static:/staticfiles
   gateway:
     image: dmsvalik/kittygram_gateway  # Качаем с Docker Hub
     env_file: .env
     ports:
       - 9000:80
     volumes:
-      - static_kittygram:/staticfiles/
-      - media_kittygram:/app/static/media
+      - static:/staticfiles/
+      - media:/app/media
